@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="源兹生物 —— 生物科研及医学临床研究服务平台，提供生物信息学、基础实验、组学服务等专业科研服务。">
+  <title>源兹生物 YZIBIO | 生物科研及医学临床研究服务平台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 粒子背景画布 -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- 左侧固定 DNA 装饰 -->
+  <div class="side-decor side-dna" data-parallax="0.12" aria-hidden="true">
+    <svg viewBox="0 0 120 800" width="120" height="800" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- 左链 -->
+      <path d="M60 20 C 30 80, 90 140, 60 200 C 30 260, 90 320, 60 380 C 30 440, 90 500, 60 560 C 30 620, 90 680, 60 740 C 40 770, 50 785, 60 792" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" opacity="0.5" class="dna-strand-a"/>
+      <!-- 右链 -->
+      <path d="M60 20 C 90 80, 30 140, 60 200 C 90 260, 30 320, 60 380 C 90 440, 30 500, 60 560 C 90 620, 30 680, 60 740 C 80 770, 70 785, 60 792" stroke="#f5c76a" stroke-width="3" stroke-linecap="round" opacity="0.45" class="dna-strand-b"/>
+      <!-- 碱基横杠 -->
+      <line x1="34" y1="110" x2="86" y2="110" stroke="#67e8f9" stroke-width="2" opacity="0.35"/>
+      <line x1="86" y1="170" x2="34" y2="170" stroke="#f5c76a" stroke-width="2" opacity="0.3"/>
+      <line x1="34" y1="290" x2="86" y2="290" stroke="#67e8f9" stroke-width="2" opacity="0.35"/>
+      <line x1="86" y1="350" x2="34" y2="350" stroke="#f5c76a" stroke-width="2" opacity="0.3"/>
+      <line x1="34" y1="470" x2="86" y2="470" stroke="#67e8f9" stroke-width="2" opacity="0.35"/>
+      <line x1="86" y1="530" x2="34" y2="530" stroke="#f5c76a" stroke-width="2" opacity="0.3"/>
+      <line x1="34" y1="650" x2="86" y2="650" stroke="#67e8f9" stroke-width="2" opacity="0.35"/>
+      <line x1="86" y1="710" x2="34" y2="710" stroke="#f5c76a" stroke-width="2" opacity="0.3"/>
+      <!-- 顶部节点 -->
+      <circle cx="60" cy="20" r="6" fill="#67e8f9" opacity="0.6"/>
+    </svg>
+    <!-- 染色体 X 形 -->
+    <svg viewBox="0 0 90 120" width="90" height="120" fill="none" xmlns="http://www.w3.org/2000/svg" class="chromosome" data-glow data-follow="10">
+      <path d="M30 10 C 55 40, 35 80, 60 110" stroke="#f5c76a" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+      <path d="M60 10 C 35 40, 55 80, 30 110" stroke="#f5c76a" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+      <circle cx="30" cy="10" r="7" fill="#f5c76a" opacity="0.5"/>
+      <circle cx="60" cy="10" r="7" fill="#f5c76a" opacity="0.5"/>
+      <circle cx="30" cy="110" r="7" fill="#f5c76a" opacity="0.5"/>
+      <circle cx="60" cy="110" r="7" fill="#f5c76a" opacity="0.5"/>
+      <circle cx="45" cy="60" r="8" fill="#67e8f9" opacity="0.35"/>
+    </svg>
+    <!-- 分子原子结构 -->
+    <svg viewBox="0 0 100 110" width="100" height="110" fill="none" xmlns="http://www.w3.org/2000/svg" class="molecule" data-glow data-follow="-14">
+      <circle cx="50" cy="55" r="30" stroke="#67e8f9" stroke-width="2" opacity="0.4" class="mol-ring"/>
+      <circle cx="50" cy="55" r="14" fill="rgba(103,232,249,0.15)" stroke="#67e8f9" stroke-width="1.6" opacity="0.6"/>
+      <circle cx="20" cy="30" r="7" fill="#f5c76a" opacity="0.55"/>
+      <circle cx="80" cy="30" r="5" fill="#67e8f9" opacity="0.55"/>
+      <circle cx="20" cy="80" r="5" fill="#67e8f9" opacity="0.55"/>
+      <circle cx="80" cy="80" r="7" fill="#f5c76a" opacity="0.55"/>
+      <line x1="27" y1="34" x2="44" y2="48" stroke="#67e8f9" stroke-width="1.6" opacity="0.4"/>
+      <line x1="56" y1="48" x2="73" y2="34" stroke="#67e8f9" stroke-width="1.6" opacity="0.4"/>
+      <line x1="27" y1="76" x2="44" y2="62" stroke="#67e8f9" stroke-width="1.6" opacity="0.4"/>
+      <line x1="56" y1="62" x2="73" y2="76" stroke="#67e8f9" stroke-width="1.6" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- 右侧固定细胞装饰 -->
+  <div class="side-decor side-cells" data-parallax="-0.1" aria-hidden="true">
+    <svg viewBox="0 0 200 720" width="200" height="720" fill="none" xmlns="http://www.w3.org/2000/svg" class="cells-svg">
+      <!-- 大细胞 -->
+      <g class="cell cell-1">
+        <circle cx="100" cy="120" r="64" stroke="#67e8f9" stroke-width="2.5" opacity="0.4"/>
+        <circle cx="100" cy="120" r="28" stroke="#f5c76a" stroke-width="2" opacity="0.5"/>
+        <circle cx="100" cy="120" r="6" fill="#f5c76a" opacity="0.6"/>
+      </g>
+      <!-- 中细胞 -->
+      <g class="cell cell-2">
+        <circle cx="150" cy="300" r="40" stroke="#67e8f9" stroke-width="2" opacity="0.35"/>
+        <circle cx="150" cy="300" r="16" stroke="#f5c76a" stroke-width="1.6" opacity="0.45"/>
+        <circle cx="150" cy="300" r="4" fill="#f5c76a" opacity="0.5"/>
+      </g>
+      <!-- 小细胞 -->
+      <g class="cell cell-3">
+        <circle cx="60" cy="440" r="26" stroke="#67e8f9" stroke-width="2" opacity="0.3"/>
+        <circle cx="60" cy="440" r="10" stroke="#f5c76a" stroke-width="1.4" opacity="0.4"/>
+        <circle cx="60" cy="440" r="3" fill="#f5c76a" opacity="0.45"/>
+      </g>
+      <!-- 出芽细胞 -->
+      <g class="cell cell-4">
+        <circle cx="130" cy="580" r="34" stroke="#67e8f9" stroke-width="2" opacity="0.3"/>
+        <circle cx="130" cy="580" r="13" stroke="#f5c76a" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="158" cy="556" r="12" stroke="#67e8f9" stroke-width="1.8" opacity="0.35"/>
+        <circle cx="130" cy="580" r="3" fill="#f5c76a" opacity="0.45"/>
+      </g>
+    </svg>
+    <!-- 神经元 -->
+    <svg viewBox="0 0 200 160" width="200" height="160" fill="none" xmlns="http://www.w3.org/2000/svg" class="neuron" data-glow data-follow="12">
+      <!-- 细胞体 -->
+      <circle cx="100" cy="80" r="26" stroke="#67e8f9" stroke-width="2.5" opacity="0.5"/>
+      <circle cx="100" cy="80" r="10" fill="rgba(245,199,106,0.35)" opacity="0.6"/>
+      <!-- 树突 -->
+      <path d="M100 54 C 90 30, 60 24, 40 14" stroke="#67e8f9" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+      <path d="M100 54 C 110 28, 140 22, 165 12" stroke="#67e8f9" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+      <path d="M74 80 C 50 76, 34 60, 20 44" stroke="#67e8f9" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <path d="M74 80 C 52 96, 40 112, 26 128" stroke="#67e8f9" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <!-- 轴突 -->
+      <path d="M126 80 C 150 78, 160 90, 178 104" stroke="#f5c76a" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+      <!-- 轴突末端 -->
+      <circle cx="178" cy="104" r="5" fill="#f5c76a" opacity="0.5"/>
+      <circle cx="188" cy="110" r="3" fill="#f5c76a" opacity="0.4"/>
+      <circle cx="170" cy="114" r="3" fill="#f5c76a" opacity="0.4"/>
+    </svg>
+    <!-- 蛋白结构 -->
+    <svg viewBox="0 0 120 120" width="120" height="120" fill="none" xmlns="http://www.w3.org/2000/svg" class="protein" data-glow data-follow="-8">
+      <path d="M20 90 C 30 60, 40 60, 50 80 C 60 100, 70 100, 80 80 C 90 60, 100 60, 104 70" stroke="#67e8f9" stroke-width="2.5" stroke-linecap="round" opacity="0.45" class="protein-backbone"/>
+      <circle cx="20" cy="90" r="8" fill="rgba(103,232,249,0.25)" stroke="#67e8f9" stroke-width="1.6" opacity="0.55"/>
+      <circle cx="50" cy="80" r="10" fill="rgba(103,232,249,0.25)" stroke="#67e8f9" stroke-width="1.6" opacity="0.55"/>
+      <circle cx="80" cy="80" r="7" fill="rgba(245,199,106,0.3)" stroke="#f5c76a" stroke-width="1.6" opacity="0.55"/>
+      <circle cx="104" cy="70" r="6" fill="rgba(245,199,106,0.3)" stroke="#f5c76a" stroke-width="1.6" opacity="0.5"/>
+      <!-- 侧链 -->
+      <path d="M50 80 C 45 62, 38 58, 30 56" stroke="#f5c76a" stroke-width="1.6" stroke-linecap="round" opacity="0.35"/>
+      <circle cx="30" cy="56" r="4" fill="#f5c76a" opacity="0.45"/>
+      <path d="M80 80 C 88 64, 95 60, 102 56" stroke="#f5c76a" stroke-width="1.6" stroke-linecap="round" opacity="0.35"/>
+      <circle cx="102" cy="56" r="4" fill="#f5c76a" opacity="0.45"/>
+    </svg>
+  </div>
+
+  <!-- 顶部信息条 -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-slogan">专业 · 专心 · 专注 生物科学</span>
+      <span class="topbar-contact">
+        <span>服务时间：8:30-17:00</span>
+        <span class="topbar-sep">|</span>
+        <span>电话：<a href="tel:021-64065237">021-64065237</a></span>
+        <span class="topbar-sep">|</span>
+        <span>手机：<a href="tel:16621731593">16621731593</a></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- 毛玻璃导航 -->
+  <header class="header" id="header">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+            <path d="M6 6c6 4 6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M26 6c-6 4-6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M9 10h14M9 16h14M9 22h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </span>
+        <span class="logo-text">源兹生物<small>YZIBIO · 专业科研服务</small></span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link active">首页</a>
+        <a href="bioinformatics.html" class="nav-link">生物信息学</a>
+        <a href="experiments.html" class="nav-link">基础实验</a>
+        <a href="omics.html" class="nav-link">组学服务</a>
+        <a href="platform.html" class="nav-link">技术平台</a>
+        <a href="resources.html" class="nav-link">技术资料</a>
+        <a href="news.html" class="nav-link">公司动态</a>
+        <a href="careers.html" class="nav-link">加入我们</a>
+        <a href="about.html" class="nav-link">关于源兹</a>
+      </nav>
+      <a href="careers.html" class="btn btn-primary nav-cta shine">合作咨询</a>
+      <button class="nav-toggle" id="navToggle" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 全屏沉浸式 Hero -->
+  <section class="hero">
+    <span class="hero-watermark" aria-hidden="true">YZIBIO</span>
+    <!-- Hero 漂浮细胞增强 -->
+    <div class="hero-cells" aria-hidden="true">
+      <span class="hc hc-1" data-glow data-follow="22"></span>
+      <span class="hc hc-2" data-glow data-follow="-14"></span>
+      <span class="hc hc-3" data-glow data-follow="16"></span>
+      <span class="hc hc-4" data-glow data-follow="-10"></span>
+      <span class="hc hc-5" data-glow data-follow="8"></span>
+    </div>
+    <!-- Hero 测序条码 -->
+    <div class="hero-barcodes" aria-hidden="true">
+      <div class="barcode barcode-left">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="barcode barcode-right">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+    <!-- Hero 基因片段 -->
+    <div class="hero-gene" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="hero-tag">BIOMEDICAL RESEARCH PLATFORM</p>
+        <h1>生物科研及医学临床<br><em>研究服务平台</em></h1>
+        <p class="hero-desc">
+          紫山竹 · 您身边最信赖的科研顾问。为生命科学领域研究者提供专业的
+          生物信息学服务与实验外包服务，覆盖高通量测序、动物实验、细胞实验与个性化数据分析。
+        </p>
+        <div class="hero-actions">
+          <a href="bioinformatics.html" class="btn btn-primary btn-lg shine">探索我们的服务</a>
+          <a href="about.html" class="btn btn-ghost btn-lg">关于源兹</a>
+        </div>
+        <ul class="hero-points">
+          <li><span class="dot"></span>国际一流生信分析团队</li>
+          <li><span class="dot"></span>肿瘤 / 炎症大型组学项目经验</li>
+          <li><span class="dot"></span>全程专属团队实时沟通</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-dna">
+          <span class="strand strand-1"></span>
+          <span class="strand strand-2"></span>
+          <span class="rung"></span><span class="rung"></span><span class="rung"></span>
+          <span class="rung"></span><span class="rung"></span><span class="rung"></span>
+          <span class="rung"></span><span class="rung"></span><span class="rung"></span>
+          <span class="rung"></span>
+          <span class="dna-orbit"></span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span class="scroll-line"></span>
+      <span class="scroll-text">SCROLL</span>
+    </div>
+  </section>
+
+  <!-- 数字实力条 -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <strong class="stat-num" data-target="100" data-suffix="+">0</strong>
+        <span>员工团队</span>
+      </div>
+      <div class="stat-item">
+        <strong class="stat-num" data-target="60" data-suffix="%">0</strong>
+        <span>硕士及以上学历</span>
+      </div>
+      <div class="stat-item">
+        <strong class="stat-num" data-target="6" data-suffix="+">0</strong>
+        <span>软件著作权与专利</span>
+      </div>
+      <div class="stat-item">
+        <strong class="stat-num" data-target="19" data-suffix="年">0</strong>
+        <span>品牌积淀</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于源兹 -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-en">ABOUT COMPANY</p>
+        <h2>关于源兹</h2>
+        <p class="section-sub">生物科研及医学临床研究服务平台 · 紫山竹，您身边最信赖的科研顾问</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <h3>上海源兹生物科技有限公司</h3>
+          <p>
+            位于上海市闵行区沧源科技园，注册资产 100 万。企业现有员工 100 余人，
+            硕士及以上学历占 60% 以上。公司致力于为生命科学领域研究者提供专业的
+            生物信息学服务以及实验外包服务。
+          </p>
+          <p>
+            主营业务包括高通量测序实验服务，动物实验、细胞实验、分子生物学实验，
+            数据分析（算法开发、数据挖掘、数据库开发）、个性化生物信息学分析等服务。
+          </p>
+          <p>
+            公司拥有一支具有国际一流水平的生物信息分析团队，曾参与肿瘤（肺癌、肝癌、胰腺癌等）、
+            炎症（肺炎、胰腺炎、肠炎等）等多项大型基因组学、蛋白组学、代谢组学、动物实验项目，
+            可为客户提供专业、合理化的实验方案和理想的实验结果。
+          </p>
+          <ul class="about-tags">
+            <li>高通量测序</li>
+            <li>动物实验</li>
+            <li>细胞实验</li>
+            <li>分子生物学</li>
+            <li>数据挖掘</li>
+            <li>数据库开发</li>
+          </ul>
+        </div>
+        <div class="about-side reveal">
+          <div class="about-card">
+            <p class="about-card-en">CORPORATE CULTURE</p>
+            <h3>企业文化</h3>
+            <p class="about-motto">专业 · 专心 · 专注<br>生物科学</p>
+            <p class="about-motto-sub">专业！效率！源兹永远的标签！</p>
+            <a href="about.html" class="btn btn-outline btn-sm shine">了解更多源兹相关服务</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 荣誉资质墙 -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-en">HONORS &amp; QUALIFICATIONS</p>
+        <h2>荣誉资质</h2>
+        <p class="section-sub">技术创新是源兹的立身之本</p>
+      </div>
+      <div class="honors-grid">
+        <div class="honor-card reveal">
+          <span class="honor-icon">◎</span>
+          <h3>软件著作权 ×5</h3>
+          <p>《基于 R 包 xCell 计算 64 种免疫细胞相对含量及下游可视化软件 v1.0》等五项软著获批</p>
+        </div>
+        <div class="honor-card reveal">
+          <span class="honor-icon">◈</span>
+          <h3>发明专利 ×1</h3>
+          <p>《纳米羟基磷灰石、PG…》发明专利授权</p>
+        </div>
+        <div class="honor-card reveal">
+          <span class="honor-icon">✦</span>
+          <h3>入驻南部科创实训基地</h3>
+          <p>上海市就业促进中心、闵行区人力资源和社会保障局主办支持</p>
+        </div>
+        <div class="honor-card reveal">
+          <span class="honor-icon">❖</span>
+          <h3>行业技术宣讲</h3>
+          <p>全国宣讲会、测序高通量数据挖掘培训班承办方</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 我们的服务 -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-en">OUR SERVICE</p>
+        <h2>我们的服务</h2>
+        <p class="section-sub">从实验设计到数据分析，覆盖科研全流程的一站式解决方案</p>
+      </div>
+      <div class="services-grid">
+        <a href="bioinformatics.html" class="service-card reveal">
+          <span class="service-icon">🧬</span>
+          <h3>生物信息学</h3>
+          <p>定制生信分析、测序数据分析、芯片数据分析，算法开发与数据挖掘。</p>
+          <span class="service-more">了解详情 <b>→</b></span>
+        </a>
+        <a href="experiments.html" class="service-card reveal">
+          <span class="service-icon">🔬</span>
+          <h3>基础实验</h3>
+          <p>分子生物学实验、细胞实验，专业的实验方案设计与实验外包服务。</p>
+          <span class="service-more">了解详情 <b>→</b></span>
+        </a>
+        <a href="omics.html" class="service-card reveal">
+          <span class="service-icon">🧫</span>
+          <h3>组学服务</h3>
+          <p>基因组学、蛋白组学、代谢组学高通量测序实验服务与结果验证。</p>
+          <span class="service-more">了解详情 <b>→</b></span>
+        </a>
+        <a href="platform.html" class="service-card reveal">
+          <span class="service-icon">⚙️</span>
+          <h3>技术平台</h3>
+          <p>标准流程化的生信分析平台与大型组学、动物实验项目经验积累。</p>
+          <span class="service-more">了解详情 <b>→</b></span>
+        </a>
+        <a href="resources.html" class="service-card reveal">
+          <span class="service-icon">📚</span>
+          <h3>技术资料</h3>
+          <p>技术宣讲、培训班与科研资料共享，助力研究者持续成长。</p>
+          <span class="service-more">了解详情 <b>→</b></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 服务流程 -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-en">WORK PROCESS</p>
+        <h2>服务流程</h2>
+        <p class="section-sub">六步流程，透明规范，全程专属团队实时沟通</p>
+      </div>
+      <ol class="process">
+        <li class="process-step reveal">
+          <span class="process-num">01</span>
+          <h4>联系在线客服</h4>
+          <p>提交你的需求<br>初步了解要求</p>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">02</span>
+          <h4>确认服务方案</h4>
+          <p>确定服务方案<br>签订服务协议</p>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">03</span>
+          <h4>提交相关资料</h4>
+          <p>提交服务所需资料<br>项目需求等</p>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">04</span>
+          <h4>合作开始</h4>
+          <p>实时沟通<br>专属团队</p>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">05</span>
+          <h4>客户确认</h4>
+          <p>服务完成<br>提交给客户确认</p>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">06</span>
+          <h4>正式提交</h4>
+          <p>后续服务完成<br>期待下次合作</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 经典案例 -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-en">CLASSIC CASES</p>
+        <h2>经典案例</h2>
+        <p class="section-sub">源兹生物 · 用事实说话</p>
+      </div>
+      <div class="cases-grid">
+        <article class="case-card reveal">
+          <div class="case-top">
+            <span class="case-badge">生信分析</span>
+            <span class="case-arrow">↗</span>
+          </div>
+          <h3>基于 BEAST2 软件的分化时间分析</h3>
+          <p>运用分子钟模型构建系统发育时间树，支撑进化与流行病学研究。</p>
+          <span class="case-tag">BEAST2 · 分化时间</span>
+        </article>
+        <article class="case-card reveal">
+          <div class="case-top">
+            <span class="case-badge">网络分析</span>
+            <span class="case-arrow">↗</span>
+          </div>
+          <h3>转录因子调控网络分析</h3>
+          <p>整合 ChIP-seq 与表达数据，构建转录因子-靶基因调控网络。</p>
+          <span class="case-tag">TF 调控网络</span>
+        </article>
+        <article class="case-card reveal">
+          <div class="case-top">
+            <span class="case-badge">网络分析</span>
+            <span class="case-arrow">↗</span>
+          </div>
+          <h3>PPI 蛋白互作网络分析</h3>
+          <p>基于蛋白互作数据库挖掘关键节点与功能模块，定位核心靶标。</p>
+          <span class="case-tag">PPI 网络</span>
+        </article>
+        <article class="case-card reveal">
+          <div class="case-top">
+            <span class="case-badge">机制研究</span>
+            <span class="case-arrow">↗</span>
+          </div>
+          <h3>miRNA 调控靶基因网络</h3>
+          <p>miRNA-mRNA 靶向关系预测与调控网络构建，辅助机制研究。</p>
+          <span class="case-tag">miRNA 网络</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 公司动态 -->
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-en">COMPANY NEWS</p>
+        <h2>公司动态</h2>
+        <p class="section-sub">这里有您想知道的最新资讯与动态</p>
+      </div>
+      <div class="news-wrap reveal">
+        <ul class="news-list">
+          <li class="news-item">
+            <time datetime="2021-08-03"><b>03</b><span>2021-08</span></time>
+            <div class="news-body">
+              <h3>热烈祝贺我公司获得了 5 个软件著作权，1 个专利</h3>
+              <p>热烈祝贺我司取得《基于 R 包 xCell 计算 64 种免疫细胞相对含量及下游可视化软件 v1.0》等五个软件著作权及《纳米羟基磷灰石、PG…》专利。</p>
+            </div>
+          </li>
+          <li class="news-item">
+            <time datetime="2019-12-13"><b>13</b><span>2019-12</span></time>
+            <div class="news-body">
+              <h3>热烈祝贺上海源兹入驻南部科创实训基地</h3>
+              <p>12 月 10 日下午，在上海市人力资源和社会保障局、闵行区人民政府的指导下，由上海市就业促进中心、闵行区人力资源和社会保障局主办…</p>
+            </div>
+          </li>
+          <li class="news-item">
+            <time datetime="2018-10-01"><b>01</b><span>2018-10</span></time>
+            <div class="news-body">
+              <h3>2018 年国庆节放假通知</h3>
+              <p>根据国家相关规定，结合公司实际情况，2018 年 10 月 1 日至 10 月 7 日放假，共 7 天，10 月 8 日正常上班。</p>
+            </div>
+          </li>
+          <li class="news-item">
+            <time datetime="2018-09-20"><b>20</b><span>2018-09</span></time>
+            <div class="news-body">
+              <h3>肠道菌群相关课题设计及研究策略专题会议</h3>
+              <p>肠道菌群相关课题设计及研究策略专题会议，莫速乎教育主办，源兹生物协办，2018/10/13-14 北京，2018/10/20-21 上海。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作伙伴墙 -->
+  <section class="partners">
+    <div class="container">
+      <div class="section-head light reveal">
+        <p class="section-en">COOPERATIVE PARTNER</p>
+        <h2>合作伙伴</h2>
+        <p class="section-sub">携手源兹生物团队，让事业和价值最大化！</p>
+      </div>
+      <ul class="partners-list reveal">
+        <li>生物在线</li>
+        <li>中国生物器材网</li>
+        <li>生物360</li>
+        <li>小木虫论坛</li>
+        <li>PubMed</li>
+        <li>国家自然科学基金委</li>
+        <li>丁香通</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 大 CTA -->
+  <section class="cta">
+    <div class="container cta-inner">
+      <h2 class="reveal">准备好开启你的科研项目了吗？</h2>
+      <p class="reveal">专业！效率！源兹永远的标签。提交需求，专属顾问即刻对接。</p>
+      <div class="cta-actions reveal">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=2638465605&site=qq&menu=yes" class="btn btn-primary btn-lg shine" target="_blank" rel="noopener">QQ 在线咨询</a>
+        <a href="tel:16621731593" class="btn btn-ghost btn-lg">电话 16621731593</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <a href="index.html" class="logo logo-light">
+          <span class="logo-mark">
+            <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+              <path d="M6 6c6 4 6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M26 6c-6 4-6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M9 10h14M9 16h14M9 22h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>
+            </svg>
+          </span>
+          <span class="logo-text">源兹生物<small>YZIBIO · 专业科研服务</small></span>
+        </a>
+        <p>生物科研及医学临床研究服务平台，为生命科学领域研究者提供专业的生物信息学与实验外包服务。</p>
+      </div>
+      <div class="footer-col">
+        <h4>快速导航</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="bioinformatics.html">生物信息学</a></li>
+          <li><a href="experiments.html">基础实验</a></li>
+          <li><a href="omics.html">组学服务</a></li>
+          <li><a href="platform.html">技术平台</a></li>
+          <li><a href="news.html">公司动态</a></li>
+          <li><a href="about.html">关于源兹</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>友情链接</h4>
+        <ul class="footer-links">
+          <li><a href="http://www.bioon.com.cn/" target="_blank" rel="noopener">生物在线</a></li>
+          <li><a href="http://www.bio-equip.com/" target="_blank" rel="noopener">中国生物器材网</a></li>
+          <li><a href="http://www.bio360.net/" target="_blank" rel="noopener">生物360</a></li>
+          <li><a href="http://muchong.com/bbs/" target="_blank" rel="noopener">小木虫论坛</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/pubmed" target="_blank" rel="noopener">PubMed</a></li>
+          <li><a href="http://www.nsfc.gov.cn/" target="_blank" rel="noopener">国家自然科学基金委</a></li>
+          <li><a href="https://www.biomart.cn/" target="_blank" rel="noopener">丁香通</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>联系方式</h4>
+        <ul class="footer-contact">
+          <li>地址：上海闵行区沧源路1200号思源创新园2号楼</li>
+          <li>电话：<a href="tel:021-64065237">021-64065237</a> / <a href="tel:16621731593">16621731593</a></li>
+          <li>网址：www.yzibio.com</li>
+          <li>服务时间：8:30-17:00</li>
+        </ul>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=2638465605&site=qq&menu=yes" class="btn btn-primary btn-sm shine" target="_blank" rel="noopener">QQ 在线咨询</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>Copyright &copy; 2002-2021 Yzibio.Com 源兹生物 版权所有　<a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">沪ICP备17027852号</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="返回顶部">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

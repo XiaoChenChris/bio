@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="源兹生物生物信息学服务 —— 定制生信分析、测序数据分析、芯片数据分析，算法开发与数据挖掘。">
+  <title>生物信息学 | 源兹生物 YZIBIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 粒子背景画布 -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- 顶部信息条 -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-slogan">专业 · 专心 · 专注 生物科学</span>
+      <span class="topbar-contact">
+        <span>服务时间：8:30-17:00</span>
+        <span class="topbar-sep">|</span>
+        <span>电话：<a href="tel:021-64065237">021-64065237</a></span>
+        <span class="topbar-sep">|</span>
+        <span>手机：<a href="tel:16621731593">16621731593</a></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- 毛玻璃导航 -->
+  <header class="header" id="header">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+            <path d="M6 6c6 4 6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M26 6c-6 4-6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M9 10h14M9 16h14M9 22h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </span>
+        <span class="logo-text">源兹生物<small>YZIBIO · 专业科研服务</small></span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="bioinformatics.html" class="nav-link active">生物信息学</a>
+        <a href="experiments.html" class="nav-link">基础实验</a>
+        <a href="omics.html" class="nav-link">组学服务</a>
+        <a href="platform.html" class="nav-link">技术平台</a>
+        <a href="resources.html" class="nav-link">技术资料</a>
+        <a href="news.html" class="nav-link">公司动态</a>
+        <a href="careers.html" class="nav-link">加入我们</a>
+        <a href="about.html" class="nav-link">关于源兹</a>
+      </nav>
+      <a href="careers.html" class="btn btn-primary nav-cta shine">合作咨询</a>
+      <button class="nav-toggle" id="navToggle" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 内页 banner -->
+  <section class="page-banner">
+    <div class="container">
+      <span class="page-en">BIOINFORMATICS</span>
+      <h1>生物信息学</h1>
+      <p>源兹生物 · 生物信息学专业服务商，从标准流程分析到个性化算法开发，一站式交付。</p>
+      <nav class="breadcrumb">
+        <a href="index.html">首页</a><span>/</span>生物信息学
+      </nav>
+    </div>
+  </section>
+
+  <!-- 内容区 -->
+  <main class="page-main">
+    <div class="container page-layout">
+
+      <!-- 侧边导航 -->
+      <aside class="page-aside">
+        <div class="aside-card">
+          <div class="aside-title">服务栏目</div>
+          <ul class="aside-links">
+            <li><a href="bioinformatics.html" class="active">生物信息学</a></li>
+            <li><a href="experiments.html">基础实验</a></li>
+            <li><a href="omics.html">组学服务</a></li>
+            <li><a href="platform.html">技术平台</a></li>
+            <li><a href="resources.html">技术资料</a></li>
+            <li><a href="news.html">公司动态</a></li>
+            <li><a href="careers.html">加入我们</a></li>
+            <li><a href="about.html">关于源兹</a></li>
+          </ul>
+        </div>
+        <div class="aside-card aside-contact">
+          <div class="aside-title">联系我们</div>
+          <div class="aside-body">
+            <p>一切良好工作的开始，都需相互之间的沟通搭桥，欢迎咨询。</p>
+            <a href="tel:16621731593" class="btn btn-primary btn-sm shine">电话 16621731593</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 主内容 -->
+      <div class="page-content">
+
+        <!-- 服务项目 -->
+        <section class="cat-block">
+          <div class="col-head reveal">
+            <span class="col-num">01</span>
+            <h2>核心服务</h2>
+            <span class="col-line"></span>
+          </div>
+          <div class="platform-grid">
+            <div class="platform-card reveal">
+              <span class="platform-icon">🧬</span>
+              <div>
+                <h3>定制生信分析</h3>
+                <p>按课题需求定制分析方案，支持算法开发、数据挖掘、数据库开发与个性化分析流程搭建。</p>
+              </div>
+            </div>
+            <div class="platform-card reveal">
+              <span class="platform-icon">📊</span>
+              <div>
+                <h3>测序数据分析</h3>
+                <p>高通量测序数据全流程分析：质控、比对、定量、差异分析、功能富集与可视化出图。</p>
+              </div>
+            </div>
+            <div class="platform-card reveal">
+              <span class="platform-icon">💾</span>
+              <div>
+                <h3>芯片数据分析</h3>
+                <p>基因表达芯片、甲基化芯片等数据的标准化处理、差异筛选与生物学意义解读。</p>
+              </div>
+            </div>
+            <div class="platform-card reveal">
+              <span class="platform-icon">⚙️</span>
+              <div>
+                <h3>算法与流程开发</h3>
+                <p>基于 R / Python 的分析流程开发与维护，自动化报告生成，助您高效产出科研成果。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 经典案例 -->
+        <section class="cat-block">
+          <div class="col-head reveal">
+            <span class="col-num">02</span>
+            <h2>经典案例</h2>
+            <span class="col-line"></span>
+          </div>
+          <div class="cases-grid">
+            <article class="case-card reveal">
+              <div class="case-top">
+                <span class="case-badge">生信分析</span>
+                <span class="case-arrow">↗</span>
+              </div>
+              <h3>基于 BEAST2 软件的分化时间分析</h3>
+              <p>运用分子钟模型构建系统发育时间树，支撑进化与流行病学研究。</p>
+              <span class="case-tag">BEAST2 · 分化时间</span>
+            </article>
+            <article class="case-card reveal">
+              <div class="case-top">
+                <span class="case-badge">网络分析</span>
+                <span class="case-arrow">↗</span>
+              </div>
+              <h3>转录因子调控网络分析</h3>
+              <p>整合 ChIP-seq 与表达数据，构建转录因子-靶基因调控网络。</p>
+              <span class="case-tag">TF 调控网络</span>
+            </article>
+            <article class="case-card reveal">
+              <div class="case-top">
+                <span class="case-badge">网络分析</span>
+                <span class="case-arrow">↗</span>
+              </div>
+              <h3>PPI 蛋白互作网络分析</h3>
+              <p>基于蛋白互作数据库挖掘关键节点与功能模块，定位核心靶标。</p>
+              <span class="case-tag">PPI 网络</span>
+            </article>
+            <article class="case-card reveal">
+              <div class="case-top">
+                <span class="case-badge">机制研究</span>
+                <span class="case-arrow">↗</span>
+              </div>
+              <h3>miRNA 调控靶基因网络</h3>
+              <p>miRNA-mRNA 靶向关系预测与调控网络构建，辅助机制研究。</p>
+              <span class="case-tag">miRNA 网络</span>
+            </article>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- 大 CTA -->
+  <section class="cta">
+    <div class="container cta-inner">
+      <h2 class="reveal">需要专业的生物信息学分析？</h2>
+      <p class="reveal">提交需求，专属生信顾问即刻对接。</p>
+      <div class="cta-actions reveal">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=2638465605&site=qq&menu=yes" class="btn btn-primary btn-lg shine" target="_blank" rel="noopener">QQ 在线咨询</a>
+        <a href="tel:16621731593" class="btn btn-ghost btn-lg">电话 16621731593</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <a href="index.html" class="logo logo-light">
+          <span class="logo-mark">
+            <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+              <path d="M6 6c6 4 6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M26 6c-6 4-6 16 0 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M9 10h14M9 16h14M9 22h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>
+            </svg>
+          </span>
+          <span class="logo-text">源兹生物<small>YZIBIO · 专业科研服务</small></span>
+        </a>
+        <p>生物科研及医学临床研究服务平台，为生命科学领域研究者提供专业的生物信息学与实验外包服务。</p>
+      </div>
+      <div class="footer-col">
+        <h4>快速导航</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="bioinformatics.html">生物信息学</a></li>
+          <li><a href="experiments.html">基础实验</a></li>
+          <li><a href="omics.html">组学服务</a></li>
+          <li><a href="platform.html">技术平台</a></li>
+          <li><a href="news.html">公司动态</a></li>
+          <li><a href="about.html">关于源兹</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>友情链接</h4>
+        <ul class="footer-links">
+          <li><a href="http://www.bioon.com.cn/" target="_blank" rel="noopener">生物在线</a></li>
+          <li><a href="http://www.bio-equip.com/" target="_blank" rel="noopener">中国生物器材网</a></li>
+          <li><a href="http://www.bio360.net/" target="_blank" rel="noopener">生物360</a></li>
+          <li><a href="http://muchong.com/bbs/" target="_blank" rel="noopener">小木虫论坛</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/pubmed" target="_blank" rel="noopener">PubMed</a></li>
+          <li><a href="http://www.nsfc.gov.cn/" target="_blank" rel="noopener">国家自然科学基金委</a></li>
+          <li><a href="https://www.biomart.cn/" target="_blank" rel="noopener">丁香通</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>联系方式</h4>
+        <ul class="footer-contact">
+          <li>地址：上海闵行区沧源路1200号思源创新园2号楼</li>
+          <li>电话：<a href="tel:021-64065237">021-64065237</a> / <a href="tel:16621731593">16621731593</a></li>
+          <li>网址：www.yzibio.com</li>
+          <li>服务时间：8:30-17:00</li>
+        </ul>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=2638465605&site=qq&menu=yes" class="btn btn-primary btn-sm shine" target="_blank" rel="noopener">QQ 在线咨询</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>Copyright &copy; 2002-2021 Yzibio.Com 源兹生物 版权所有　<a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">沪ICP备17027852号</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="返回顶部">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
