@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BioChris 人机验证体验：通过 Cloudflare Turnstile 后访问受保护内容。">
+  <title>人机验证体验 | BioChris</title>
+  <link rel="stylesheet" href="css/turnstile.css?v=1">
+  <script src="js/turnstile.js?v=1" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="/">BIO<span>CHRIS</span></a><a href="/">返回网站首页 ↗</a></header>
+  <main>
+    <div class="eyebrow">CLOUDFLARE TURNSTILE</div>
+    <h1>一次验证，<br><span>安心继续。</span></h1>
+    <p class="intro">先完成人机验证，再试着读取受保护内容。验证通过后，当前浏览器可在 10 分钟内继续访问这个示例接口。</p>
+    <div class="panels">
+      <section class="card" aria-labelledby="verify-title">
+        <span class="step">01 · 验证身份</span>
+        <h2 id="verify-title">确认你是真实访客</h2>
+        <p>Cloudflare 会根据访问情况完成检查，必要时需要你进行简单操作。</p>
+        <div id="turnstile-widget"></div>
+        <button id="verify" disabled>验证并继续</button>
+        <button class="secondary" id="retry" hidden>重新加载验证</button>
+        <p id="status" class="status" role="status" aria-live="polite">正在加载验证组件…</p>
+        <noscript>请启用 JavaScript 后使用人机验证。</noscript>
+      </section>
+      <section class="card" aria-labelledby="resource-title">
+        <span class="step">02 · 访问内容</span>
+        <h2 id="resource-title">读取受保护内容</h2>
+        <p>可以先尝试访问：尚未验证时，服务器会拒绝请求。完成左侧验证后，再次点击即可查看内容。</p>
+        <button class="secondary" id="resource">尝试访问受保护内容</button>
+        <div id="result" class="result" role="status" aria-live="polite">等待你的第一次访问。</div>
+      </section>
+    </div>
+    <p class="note">此页面仅保护本页的示例接口，其他网站页面照常开放。验证服务由 Cloudflare 提供。</p>
+  </main>
+  <footer>BioChris · 人机验证体验</footer>
+</body>
+</html>

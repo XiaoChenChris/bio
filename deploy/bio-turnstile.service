@@ -1,0 +1,25 @@
+[Unit]
+Description=BioChris Turnstile verification service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+WorkingDirectory=/opt/bio-turnstile
+EnvironmentFile=/etc/bio-turnstile.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/bio-turnstile/turnstile_server.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+RestrictAddressFamilies=AF_INET AF_INET6
+MemoryMax=96M
+TasksMax=32
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
