@@ -16,3 +16,6 @@ desktop.ini
 # ---- Python 本地预览缓存（启动网站.bat 用 python http.server 启动） ----
 __pycache__/
 *.py[cod]
+.env
+*.env
+!*.env.example
